@@ -1,7 +1,7 @@
 <?php
 
 class EnvHelper {
-    public static function execute()
+    public function execute()
     {
         return app()->environment(['local', 'dev']);
     }
