@@ -1,6 +1,6 @@
 <?php
 
-class UuidGen
+class GenerrateUuid
 {
     public function execute()
     {
