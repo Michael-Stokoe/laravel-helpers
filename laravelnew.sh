@@ -119,9 +119,9 @@ function laravelnew () {
     php artisan key:generate
     
     echo "Installing extra dependencies..."
-    echo "Installing laravel-debugbar"
-    composer require --dev barryvdh/laravel-debugbar
-    echo "Installing laravel-ide-helper"
+    echo "Installing itsgoingd/clockwork"
+    composer require --dev itsgoingd/clockwork
+    echo "Installing barryvdh/laravel-ide-helper"
     composer require --dev barryvdh/laravel-ide-helper
     echo "Generating ide helper files..."
     php artisan ide-helper:generate
