@@ -66,8 +66,10 @@ sed -i "s/DB_PASSWORD=/DB_PASSWORD='$dbpassword'/g" .env
 sed -i "s/REDIS_HOST=127\.0\.0\.1/REDIS_HOST=$homesteadip/g" .env
 
 # Comment out the following if you don't use /etc/hosts
-if ! [ grep -Fxq "$homesteadip $projectname.$tld" /etc/hosts ]
+if grep -Fxq "$homesteadip $projectname.$tld" /etc/hosts
 then
+    echo "Hosts entry already exists!"
+else
     echo "Hosts entry didn't exist for application."
     echo "Adding hosts entry for this application."
     echo "$homesteadip $projectname.$tld" | sudo tee -a /etc/hosts
@@ -75,8 +77,10 @@ then
 fi
 
 # Comment out the following if you want to write the homestead.yaml entries yourself.
-if ! [ grep -Fxq "$projectname.$tld" $hsyaml ]
+if grep -Fq "$projectname.$tld" $hsyaml
 then
+    echo "Homestead.yaml entry already exists!"
+else
     echo "No entries in $hsyaml for this application, adding them now."
     sed -i "/^sites:/a \ \ \ \ - map: $projectname.$tld" $hsyaml
     sed -i "/^\ \ \ \ - map: $projectname.$tld/a \ \ \ \ \ \ to: /home/vagrant/projects/$projectname/public" $hsyaml
