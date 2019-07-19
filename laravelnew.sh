@@ -1,3 +1,5 @@
+#!/usr/bin/bash
+
 function laravelnew () {
     # New Project Setup.
     # 
@@ -18,6 +20,9 @@ function laravelnew () {
     
     # Homestead.yaml location
     hsyaml=~/Homestead/Homestead.yaml
+
+    # Database password
+    dbpassword=secret
     
     echo "Finding projects directory..."
     
@@ -65,7 +70,7 @@ function laravelnew () {
     # Current directory name. (To use as APP_NAME, APP_URL and MySQL DB name).
 
     if ! [ -f .env ]; then
-        if ! [ -f .env.example]; then
+        if ! [ -f .env.example ]; then
             echo "Please make sure .env.example exists."
             return 0
         fi
@@ -100,9 +105,9 @@ function laravelnew () {
     
     echo "Running $packagemanager & composer"
 
-    if [ "$packagemanager" -eq "yarn" ]; then
+    if [ "$packagemanager" = "yarn" ]; then
         yarn
-    elif [ "$packagemanager" -eq "npm" ]; then
+    elif [ "$packagemanager" = "npm" ]; then
         npm install
     else
         echo "$packagemanager isn't a known package manager. Moving on."
@@ -113,7 +118,7 @@ function laravelnew () {
     if ! [ -f artisan ]; then
         echo "Artisan not detected. Exiting."
         return 0
-    if
+    fi
 
     echo "Generating App Key"
     php artisan key:generate
