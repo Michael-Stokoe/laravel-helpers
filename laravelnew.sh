@@ -1,5 +1,9 @@
 #!/usr/bin/bash
 
+# Installation:
+# Either copy & paste the full function into your .bashrc (or similar)
+# OR save this file as laravelnew.sh and add source ~/laravelnew.sh (or wherever it was saved to) to your .bashrc (or similar)
+
 function laravelnew () {
     # New Project Setup.
     # 
