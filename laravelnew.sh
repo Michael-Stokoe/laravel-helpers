@@ -110,12 +110,10 @@ echo "Generating App Key"
 php artisan key:generate
 
 echo "Installing extra dependencies..."
-composer require --dev itsgoingd/clockwork
-composer require --dev barryvdh/laravel-ide-helper
+composer require --dev itsgoingd/clockwork 1>/dev/null
+composer require --dev barryvdh/laravel-ide-helper 1>/dev/null
 php artisan ide-helper:generate
-composer require --dev protoqol/prequel
-php artisan prequel:install
-composer require spatie/laravel-permission
+# composer require spatie/laravel-permission 1>/dev/null
 echo "Publishing assets..."
 php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider" --tag="migrations"
 php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider" --tag="config"
