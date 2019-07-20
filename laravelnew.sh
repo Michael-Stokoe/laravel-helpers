@@ -53,10 +53,6 @@ laravel new $projectname 1>/dev/null
 
 cd ./$projectname
 
-# Change your editor here if you don't use VS Code.
-code -g ./
-xdg-open ./ 1>/dev/null
-
 sed -i "s/APP_NAME=Laravel/APP_NAME='$projectname'/g" .env
 sed -i "s/APP_URL=http:\/\/localhost/APP_URL=http:\/\/$projectname.$tld/g" .env
 sed -i "s/DB_HOST=127\.0\.0\.1/DB_HOST=$homesteadip/g" .env
@@ -88,6 +84,10 @@ else
     sed -i "/^databases:/a \ \ \ \ - $projectname" $hsyaml
 fi
 
+# Change your editor here if you don't use VS Code.
+code -g ./
+xdg-open ./ 1>/dev/null
+
 echo "Running $packagemanager & composer"
 
 if [ "$packagemanager" = "yarn" ]
@@ -110,10 +110,12 @@ echo "Generating App Key"
 php artisan key:generate
 
 echo "Installing extra dependencies..."
-composer require --dev itsgoingd/clockwork 1>/dev/null
-composer require --dev barryvdh/laravel-ide-helper 1>/dev/null
+composer require --dev itsgoingd/clockwork
+composer require --dev barryvdh/laravel-ide-helper
 php artisan ide-helper:generate
-# composer require spatie/laravel-permission 1>/dev/null
+composer require --dev protoqol/prequel
+php artisan prequel:install
+composer require spatie/laravel-permission
 echo "Publishing assets..."
 php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider" --tag="migrations"
 php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider" --tag="config"
